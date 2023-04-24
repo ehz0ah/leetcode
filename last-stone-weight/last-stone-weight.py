@@ -1,20 +1,24 @@
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        placeholder = []
-        if len(stones) == 1:
-            return stones[0]
-        if len(stones) == 2:
-            return abs(stones[0] - stones[1])
-        while len(stones) > 1:
-            placeholder.append(stones.pop(stones.index(max(stones))))
-            if len(stones) == 1 and len(placeholder) == 1:
-                return (placeholder[0] - stones[0])
-            elif len(placeholder) == 2 and placeholder[0] == placeholder[1]:
-                placeholder = []
-            elif len(placeholder) == 2:
-                stones.append(placeholder[0] - placeholder[1])
-                placeholder = []
-        return stones[0]
+        # convert stones to negative numbers for max heap
+        max_heap = [-stone for stone in stones]
+        heapq.heapify(max_heap)
+
+        while len(max_heap) > 1:
+            # get the two largest stones
+            stone1 = heapq.heappop(max_heap)
+            stone2 = heapq.heappop(max_heap)
+
+            # smash the two stones together
+            if stone1 != stone2:
+                heapq.heappush(max_heap, stone1 - stone2)
+
+        # if there is only one stone left, return its positive value
+        if max_heap:
+            return -max_heap[0]
+        else:
+            return 0
+        
         
 
 
