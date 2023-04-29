@@ -5,6 +5,7 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        # Merge 2 singly linked list
         '''
         make a pointer dum and a empty node dummy
         iterate through the two list
