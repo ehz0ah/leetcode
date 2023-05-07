@@ -1,14 +1,13 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        one, two = 0, 1,
-        while two <= len(nums) - 1:
-            if nums[one] != nums[two]:
-                one += 1
-                two += 1
-            elif nums[one] == nums[two] and two - one >= 2:
-                nums.remove(nums[two])
-            else:
-                two += 1
-        return len(nums)
-
+         # Initialize an integer k that updates the kth index of the array...
+        # only when the current element does not match either of the two previous indexes. ...
+        k = 0
+        # Traverse all elements through loop...
+        for i in nums:
+            # If the index does not match elements, count that element and update it...
+            if k < 2 or i != nums[k - 2]:
+                nums[k] = i
+                k += 1
+        return k       # Return k after placing the final result in the first k slots of nums..
             
