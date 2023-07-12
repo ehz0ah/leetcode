@@ -1,13 +1,16 @@
 class Solution:
     def getRow(self, n: int) -> List[int]:
-        rows = []
-        for x in range(0,n+1):
-            rows.append([0]*(x+1))
-            
-        for i in range(0,n+1):
-            for k in range(0,i+1):
-                if (k == 0) or (k == i):
-                    rows[i][k] = 1
-                else:
-                    rows[i][k] = rows[i-1][k] + rows[i-1][k-1]
-        return rows[n]
+        prev = [1]
+        curr = [1,1]
+        if n == 0:
+            return prev
+        if n == 1:
+            return curr
+        for i in range(2,n+1):
+            prev = curr
+            curr = [1]
+            for j in range(1,i):
+                curr.append(prev[j-1] + prev[j])
+            curr.append(1)
+        return curr
+        
